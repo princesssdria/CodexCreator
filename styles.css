@@ -1,4 +1,6 @@
 :root {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #eef2ff;
   color-scheme: light;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
@@ -9,6 +11,112 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #2b3676 0%, #111629 45%, #0a0f1f 100%);
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.2rem 1rem 2rem;
+}
+
+.card {
+  background: rgba(15, 24, 48, 0.9);
+  border: 1px solid rgba(118, 141, 255, 0.25);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.hero p {
+  margin: 0.4rem 0 1rem;
+  color: #c8d4ff;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem;
+}
+
+.hero-metrics div {
+  background: rgba(93, 117, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(152, 169, 255, 0.3);
+}
+
+.meta-label {
+  display: block;
+  color: #bccbff;
+  font-size: 0.8rem;
+}
+
+.gauges {
+  margin-top: 1rem;
+}
+
+.gauge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brightness-pill {
+  font-weight: 700;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(53, 197, 113, 0.2);
+}
+
+.meter-block {
+  margin-top: 0.8rem;
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.meter-track {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(209, 218, 255, 0.13);
+  overflow: hidden;
+}
+
+.meter-fill {
+  width: 66%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff794f, #ffe073, #4ff8a8, #6cb3ff, #b066ff);
+  transition: width 0.25s ease, filter 0.25s ease;
+}
+
+.meter-fill.energy {
+  background: linear-gradient(90deg, #f6ac4f, #ffd86a, #7cf3ff);
+}
+
+.meter-fill.discipline {
+  background: linear-gradient(90deg, #ff7373, #f8c56b, #85f88e);
+}
+
+.grid {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+.action-list {
   background: linear-gradient(120deg, #f0f5ff, #f7fbff);
   color: #1d2a3a;
 }
@@ -85,6 +193,92 @@ h2 {
   gap: 0.5rem;
 }
 
+.action-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(163, 178, 255, 0.35);
+  border-radius: 10px;
+  background: rgba(79, 103, 255, 0.15);
+  color: #f4f7ff;
+  padding: 0.55rem 0.65rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(113, 136, 255, 0.26);
+}
+
+.action-btn:active {
+  box-shadow: 0 0 0 3px rgba(130, 213, 255, 0.25);
+}
+
+.points-chip {
+  font-size: 0.85rem;
+  color: #bfe8ff;
+}
+
+.status-box {
+  border: 1px solid rgba(184, 195, 255, 0.4);
+  border-radius: 10px;
+  padding: 0.7rem;
+  margin: 0.4rem 0 0.8rem;
+  background: rgba(104, 124, 240, 0.12);
+}
+
+.effects,
+.log {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.secondary {
+  margin-top: 0.8rem;
+  border: 1px solid rgba(181, 195, 255, 0.5);
+  background: transparent;
+  color: #eaf0ff;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+}
+
+.xp-pop-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.xp-pop {
+  position: fixed;
+  font-weight: 700;
+  color: #fff9b0;
+  text-shadow: 0 0 10px rgba(255, 230, 122, 0.7);
+  animation: floatUp 900ms ease forwards;
+}
+
+.level-up {
+  animation: pulseGlow 800ms ease;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-36px);
+  }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 rgba(187, 125, 255, 0); }
+  35% { box-shadow: 0 0 30px rgba(187, 125, 255, 0.9); }
+  100% { box-shadow: 0 0 0 rgba(187, 125, 255, 0); }
 .check-item {
   display: flex;
   align-items: center;
