@@ -38,6 +38,23 @@
         <div class="meter-block">
           <div class="meter-label"><span>Discipline 🎯</span><span id="disciplineNumber">100</span></div>
           <div class="meter-track"><div id="disciplineBar" class="meter-fill discipline"></div></div>
+    <title>Student Vitality RPG</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Student Vitality RPG</h1>
+        <p class="subtitle">Start each day with 100 Brightness Points and level up your habits.</p>
+      </header>
+
+      <section class="score-panel" aria-live="polite">
+        <div class="score-row">
+          <span class="label">Brightness Points</span>
+          <span id="scoreValue" class="score-value">100</span>
+        </div>
+        <div class="progress-shell" role="progressbar" aria-valuemin="0" aria-valuemax="150" aria-valuenow="100" aria-label="Brightness points progress">
+          <div id="progressBar" class="progress-fill"></div>
         </div>
       </section>
 
@@ -70,6 +87,24 @@
       </section>
 
       <div id="xpPopLayer" class="xp-pop-layer" aria-hidden="true"></div>
+        <div class="card">
+          <h2>Daily Habit Log</h2>
+          <p>Check completed habits to gain points.</p>
+          <form id="habitForm" class="checklist"></form>
+        </div>
+
+        <div class="card">
+          <h2>Debuffs</h2>
+          <p>Check any debuffs that happened today.</p>
+          <form id="debuffForm" class="checklist"></form>
+        </div>
+      </section>
+
+      <section class="card status-card">
+        <h2>Character Status</h2>
+        <button id="statusButton" type="button">Generate End-of-Day Status</button>
+        <p id="statusMessage" class="status-message">Your status will appear here after evaluation.</p>
+      </section>
     </main>
 
     <script src="script.js"></script>
