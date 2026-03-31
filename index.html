@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grind & Glow</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero card">
+        <h1>Grind &amp; Glow</h1>
+        <p>Gamify healthy habits while managing college stress with Brightness Points.</p>
+        <div class="hero-metrics">
+          <div><span class="meta-label">Level</span><strong id="levelValue">1</strong></div>
+          <div><span class="meta-label">XP</span><strong id="xpValue">0 / 100</strong></div>
+          <div><span class="meta-label">Streak</span><strong id="streakValue">0 🔥</strong></div>
+          <div><span class="meta-label">Status</span><strong id="statusValue">Balanced</strong></div>
+        </div>
+      </header>
+
+      <section class="card gauges">
+        <div class="gauge-head">
+          <h2>Vitals</h2>
+          <span id="brightnessValue" class="brightness-pill">100 BP</span>
+        </div>
+
+        <div class="meter-block">
+          <div class="meter-label"><span>Brightness</span><span id="brightnessNumber">100</span></div>
+          <div class="meter-track"><div id="brightnessBar" class="meter-fill"></div></div>
+        </div>
+
+        <div class="meter-block">
+          <div class="meter-label"><span>Energy ⚡</span><span id="energyNumber">100</span></div>
+          <div class="meter-track"><div id="energyBar" class="meter-fill energy"></div></div>
+        </div>
+
+        <div class="meter-block">
+          <div class="meter-label"><span>Discipline 🎯</span><span id="disciplineNumber">100</span></div>
+          <div class="meter-track"><div id="disciplineBar" class="meter-fill discipline"></div></div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Daily Actions</h2>
+          <p>Tap actions to earn points and build your streak multiplier.</p>
+          <div id="actionsList" class="action-list"></div>
+        </article>
+
+        <article class="card">
+          <h2>Debuffs ☠️</h2>
+          <p>Apply debuffs if they happened. Repeats can trigger negative statuses.</p>
+          <div id="debuffList" class="action-list"></div>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Character Status Board</h2>
+          <p id="statusDescription" class="status-box">You are Balanced. Keep stacking healthy wins.</p>
+          <ul id="activeEffects" class="effects"></ul>
+        </article>
+
+        <article class="card">
+          <h2>Tips 💡</h2>
+          <p id="tipsMessage" class="status-box">Tips will appear here based on your status.</p>
+        </article>
+
+        <article class="card">
+          <h2>Recent Action Log</h2>
+          <ul id="actionLog" class="log"></ul>
+          <button id="resetButton" type="button" class="secondary">Reset Day</button>
+        </article>
+      </section>
+
+      <div id="xpPopLayer" class="xp-pop-layer" aria-hidden="true"></div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
