@@ -23,6 +23,11 @@ body {
   margin: 0 auto;
   padding: 1.5rem 1rem;
 }
+.hero-metrics div {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
 
 /* --- RESTORED: Status & Score Cards --- */
 .score-panel, .card, .status-box {
@@ -110,4 +115,38 @@ body {
 .debuffs .action-btn:hover {
   background: rgba(255, 77, 77, 0.15);
   border-color: #ff7373;
+}
+.status-box {
+  transition: all 0.3s ease;
+}
+
+.status-burned {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+}
+
+.status-balanced {
+  border-color: #7cf3ff;
+  box-shadow: 0 0 15px rgba(124, 243, 255, 0.3);
+}
+
+.status-locked {
+  border-color: #b066ff;
+  box-shadow: 0 0 15px rgba(176, 102, 255, 0.4);
+}
+
+.status-unmotivated {
+  border-color: #ffd166;
+  box-shadow: 0 0 15px rgba(255, 209, 102, 0.3);
+}
+.meta-label {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.status-box {
+  line-height: 1.6;
 }
