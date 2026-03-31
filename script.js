@@ -66,6 +66,7 @@ const el = {
   streakValue: document.getElementById('streakValue'),
   statusValue: document.getElementById('statusValue'),
   statusDescription: document.getElementById('statusDescription'),
+  tipsMessage: document.getElementById('tipsMessage'),
   actionLog: document.getElementById('actionLog'),
   activeEffects: document.getElementById('activeEffects'),
   resetButton: document.getElementById('resetButton'),
@@ -160,6 +161,7 @@ function updateStatus() {
   if (state.counters.lateSleep >= 3) effects.push('Exhausted: everything costs more effort.');
   if (state.counters.phoneBinge >= 2) effects.push('Distracted: task rewards are reduced.');
   if (state.counters.burnout >= 2 || state.energy < 35) effects.push('Burned Out: XP gain reduced.');
+  if (state.discipline < 50 && state.streak < 2) effects.push('Unmotivated: lower streak bonus.');
   if (state.discipline < 45 && state.energy < 45) effects.push('Overstimulated: random focus drops.');
 
   let mainStatus = 'Balanced';
@@ -203,6 +205,7 @@ function render() {
   el.streakValue.textContent = `${state.streak} 🔥 (${currentMultiplier().toFixed(2)}x)`;
   el.statusValue.textContent = `${state.status}`;
   el.statusDescription.textContent = `You are ${state.status}. ${buildStatusDescription()}`;
+  el.tipsMessage.textContent = getTipsForStatus(state.status);
 
   el.brightnessBar.style.width = progressVisual(state.brightness, MAX_BRIGHTNESS);
   el.energyBar.style.width = progressVisual(state.energy, 150);
@@ -211,6 +214,26 @@ function render() {
 
   renderEffects();
   renderLog();
+}
+
+function getTipsForStatus(status) {
+  if (status === 'Burned Out') {
+    return 'Focus on yourself. Get rest, drink water, and avoid overloading your schedule.';
+  }
+
+  if (status === 'Balanced') {
+    return 'Keep going! Maintain your habits and stay consistent.';
+  }
+
+  if (status === 'Locked In') {
+    return "You're in a great flow. Keep pushing but remember to rest when needed.";
+  }
+
+  if (status === 'Unmotivated') {
+    return 'Start small. Even one completed task can build momentum.';
+  }
+
+  return 'Tips will appear here based on your status.';
 }
 
 function buildStatusDescription() {
