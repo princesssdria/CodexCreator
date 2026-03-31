@@ -82,7 +82,7 @@ function createActionButton(action, isDebuff) {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'action-btn';
-  button.innerHTML = `<span>${action.label}</span><span class="points-chip">${action.points > 0 ? '+' : ''}${action.points} BP</span>`;
+  button.innerHTML = `<span>${action.label}</span><span class="points-chip">${action.points > 0 ? '+' : ''}${action.points} ✨</span>`;
 
   button.addEventListener('click', () => {
     applyAction(action, isDebuff);
@@ -196,7 +196,7 @@ function brightnessFilter() {
 }
 
 function render() {
-  el.brightnessValue.textContent = `${state.brightness} BP`;
+  el.brightnessValue.textContent = `${state.brightness} 🔆`;
   el.brightnessNumber.textContent = `${state.brightness}`;
   el.energyNumber.textContent = `${state.energy}`;
   el.disciplineNumber.textContent = `${state.discipline}`;
@@ -204,8 +204,25 @@ function render() {
   el.xpValue.textContent = `${state.xp} / ${LEVEL_XP}`;
   el.streakValue.textContent = `${state.streak} 🔥 (${currentMultiplier().toFixed(2)}x)`;
   el.statusValue.textContent = `${state.status}`;
-  el.statusDescription.textContent = `You are ${state.status}. ${buildStatusDescription()}`;
-  el.tipsMessage.textContent = getTipsForStatus(state.status);
+  el.statusDescription.textContent = `You are ${state.status}.`;
+  el.statusDescription.className = 'status-box';
+
+  if (state.status.includes('Burned Out')) {
+  el.statusDescription.classList.add('status-burned');
+  } else if (state.status.includes('Balanced')) {
+  el.statusDescription.classList.add('status-balanced');
+  } else if (state.status.includes('Locked In')) {
+  el.statusDescription.classList.add('status-locked');
+  } else if (state.status.includes('Unmotivated')) {
+  el.statusDescription.classList.add('status-unmotivated');
+  }
+  if (el.tipsMessage) {
+  el.tipsMessage.style.opacity = 0;
+  setTimeout(() => {
+    el.tipsMessage.textContent = getTipsForStatus(state.status);
+    el.tipsMessage.style.opacity = 1;
+  }, 150);
+}
 
   el.brightnessBar.style.width = progressVisual(state.brightness, MAX_BRIGHTNESS);
   el.energyBar.style.width = progressVisual(state.energy, 150);
