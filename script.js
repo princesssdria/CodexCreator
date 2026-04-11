@@ -51,6 +51,11 @@ const state = {
   }
 };
 
+const GLOW_MODE_DURATION_MS = 4500;
+let glowTimeoutId = null;
+let sparkleIntervalId = null;
+let previousStatus = state.status;
+
 const el = {
   actionsList: document.getElementById('actionsList'),
   debuffList: document.getElementById('debuffList'),
@@ -71,6 +76,8 @@ const el = {
   activeEffects: document.getElementById('activeEffects'),
   resetButton: document.getElementById('resetButton'),
   xpPopLayer: document.getElementById('xpPopLayer'),
+  glowOverlay: document.getElementById('glowOverlay'),
+  sparkleLayer: document.getElementById('sparkleLayer'),
   hero: document.querySelector('.hero')
 };
 
@@ -231,6 +238,48 @@ function render() {
 
   renderEffects();
   renderLog();
+  syncGlowModeVisual();
+}
+
+function syncGlowModeVisual() {
+  if (state.status === 'Glow Mode' && previousStatus !== 'Glow Mode') {
+    activateGlowModeVisual();
+  }
+
+  previousStatus = state.status;
+}
+
+function activateGlowModeVisual() {
+  if (!el.glowOverlay || !el.sparkleLayer) return;
+
+  clearTimeout(glowTimeoutId);
+  clearInterval(sparkleIntervalId);
+  el.glowOverlay.classList.add('active');
+  spawnSparklesBurst();
+  sparkleIntervalId = window.setInterval(spawnSparklesBurst, 280);
+
+  glowTimeoutId = window.setTimeout(() => {
+    el.glowOverlay.classList.remove('active');
+    clearInterval(sparkleIntervalId);
+    sparkleIntervalId = null;
+  }, GLOW_MODE_DURATION_MS);
+}
+
+function spawnSparklesBurst() {
+  if (!el.sparkleLayer) return;
+
+  const sparkleCount = Math.floor(Math.random() * 3) + 2;
+  for (let i = 0; i < sparkleCount; i += 1) {
+    const sparkle = document.createElement('span');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = `${Math.random() * 100}%`;
+    sparkle.style.top = `${Math.random() * 100}%`;
+    sparkle.style.setProperty('--sparkle-x', `${(Math.random() - 0.5) * 60}px`);
+    sparkle.style.setProperty('--sparkle-y', `${-40 - Math.random() * 60}px`);
+    el.sparkleLayer.appendChild(sparkle);
+
+    window.setTimeout(() => sparkle.remove(), 1400);
+  }
 }
 
 function getTipsForStatus(status) {
@@ -324,6 +373,13 @@ function resetDay() {
   state.statusEffects = [];
   state.log = [];
   state.counters = { lateSleep: 0, phoneBinge: 0, burnout: 0 };
+  previousStatus = state.status;
+  clearTimeout(glowTimeoutId);
+  clearInterval(sparkleIntervalId);
+  glowTimeoutId = null;
+  sparkleIntervalId = null;
+  if (el.glowOverlay) el.glowOverlay.classList.remove('active');
+  if (el.sparkleLayer) el.sparkleLayer.innerHTML = '';
   render();
 }
 
